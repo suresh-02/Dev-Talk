@@ -1,0 +1,48 @@
+*{
+    // font-family: "GT Walsheim Pro";
+    scroll-behavior: smooth;
+}
+
+
+
+JavaScript
+CSS
+#components-form-demo-normal-login .login-form {
+  max-width: 300px;
+}
+#components-form-demo-normal-login .login-form-forgot {
+  float: right;
+}
+#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+  float: left;
+}
+ .login-form-button {
+  width: 100%;
+}
+
+// .link:hover{
+//     background-color: palevioletred;
+//     color: white;
+// }
+
+// ::selection{
+//     background-color:teal;
+//     color: white;
+// }
+
+// .write{
+//     margin-top: 20px;
+//     max-width: 900px;
+// }
+
+// .content{
+//     flex: 5;
+    
+// }
+
+// .menu{
+//     flex:2;
+//     display: flex;
+//     flex-direction: column;
+//     gap:20px;
+// }
