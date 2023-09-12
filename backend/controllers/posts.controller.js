@@ -1,3 +1,3 @@
-// export const addpost = (req, res) => {
-//   res.json("itworks");
-// };
+export const addpost = (req, res) => {
+  res.json("itworks");
+};
