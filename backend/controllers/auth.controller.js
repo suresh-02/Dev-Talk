@@ -16,8 +16,8 @@ export const register = (req, res) => {
 
     const hash = bcrypt.hashSync(req.body.password, 10); //? hash the passsword
 
-    // const q =
-    //   "INSERT INTO users(`email`,`username`,`password`,`img`) VALUES (?,?,?,?)"; //? query to insert new values
+    const q =
+      "INSERT INTO users(`email`,`username`,`password`,`img`) VALUES (?,?,?,?)"; //? query to insert new values
 
     const values = [req.body.email, req.body.username, hash, req.body.img]; //? user input values
 
@@ -44,12 +44,12 @@ export const login = (req, res) => {
 
     //? to validate the password is valid or not.
 
-    // const isValidPassword = bcrypt.compareSync(password, data[0].password);
+    const isValidPassword = bcrypt.compareSync(password, data[0].password);
 
-    // if (!isValidPassword) {
-    //   return res.status(404).json({
-    //     err: "Invalid username or password!",
-    //   });
-    // }
+    if (!isValidPassword) {
+      return res.status(404).json({
+        err: "Invalid username or password!",
+      });
+    }
   });
 };
