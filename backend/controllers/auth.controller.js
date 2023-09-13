@@ -1,5 +1,6 @@
 import { db } from "../db.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 //! controller for new user registration.
 
@@ -19,10 +20,10 @@ export const register = (req, res) => {
     const q =
       "INSERT INTO users(`email`,`username`,`password`,`img`) VALUES (?,?,?,?)"; //? query to insert new values
 
-    const values = [req.body.email, req.body.username, hash, req.body.img]; //? user input values
+    const values = [req.body.email, req.body.username, hash, ""]; //? user input values
 
     db.query(q, values, (err, data) => {
-      if (err) return res.json(err);
+      if (err) return res.status(422).json(err);
       return res.status(201);
     });
   });
@@ -47,9 +48,16 @@ export const login = (req, res) => {
     const isValidPassword = bcrypt.compareSync(password, data[0].password);
 
     if (!isValidPassword) {
-      return res.status(404).json({
-        err: "Invalid username or password!",
-      });
+      return res.status(404).json("not passed");
     }
+    const token = jwt.sign({ id: data[0].id }, "TOKEN");
+    delete data[0].password;
+    //? cookie parsing
+    res
+      .cookie("accessToken", token, {
+        httpOnly: true,
+      })
+      .status(200)
+      .json(data[0]);
   });
 };

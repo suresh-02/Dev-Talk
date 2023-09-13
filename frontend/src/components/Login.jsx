@@ -4,12 +4,6 @@ import { Button, Form, Input } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const onFinish = (values) => {
-  console.log("Success:", values);
-};
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
 const App = () => {
   const [values, setValues] = useState({
     username: "",
@@ -30,15 +24,21 @@ const App = () => {
     setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async () => {
-    // try {
-    //   await axios.post("http://localhost:3000/api/auth/login", values);
-    //   navigate("/");
-    //   console.log(values);
-    // } catch (err) {
-    //   console.log(err);
-    //   setError(err.data.response);
-    // }
+  const handleSubmit = () => {
+    try {
+      axios
+        .post("http://localhost:3000/api/auth/login", values)
+        .then((res) => {
+          console.log(res);
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.log(err);
+      setError(err.data.response);
+    }
   };
 
   return (
@@ -68,7 +68,7 @@ const App = () => {
       >
         <Form.Item
           label="Username"
-          name="username"
+          onChange={handleChange}
           className="w-[400px]"
           rules={[
             {
@@ -77,12 +77,12 @@ const App = () => {
             },
           ]}
         >
-          <Input onChange={handleChange} />
+          <Input name="username" />
         </Form.Item>
 
         <Form.Item
           label="Password"
-          name="password"
+          onChange={handleChange}
           rules={[
             {
               required: true,
@@ -90,7 +90,7 @@ const App = () => {
             },
           ]}
         >
-          <Input.Password onChange={handleChange} />
+          <Input.Password name="password" />
         </Form.Item>
 
         <Form.Item
