@@ -11,7 +11,7 @@ const App = () => {
   });
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+    handleSubmit();
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -36,8 +36,8 @@ const App = () => {
           console.log(err);
         });
     } catch (err) {
-      console.log(err);
-      setError(err.data.response);
+      console.log(err.response.data);
+      setError(err.response.data);
     }
   };
 
@@ -70,6 +70,7 @@ const App = () => {
           label="Username"
           onChange={handleChange}
           className="w-[400px]"
+          name="username"
           rules={[
             {
               required: true,
@@ -83,6 +84,7 @@ const App = () => {
         <Form.Item
           label="Password"
           onChange={handleChange}
+          name="password"
           rules={[
             {
               required: true,
@@ -99,6 +101,7 @@ const App = () => {
             span: 16,
           }}
         >
+          {err && <p>{setError}</p>}
           <Button
             type="primary"
             className="w-[150px] bg-[#4076FF]"

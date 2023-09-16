@@ -21,18 +21,13 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      axios
-        .post("http://localhost:3000/api/auth/register", values)
-        .then((res) => {
-          console.log(res);
-          navigate("/login");
-        })
-        .catch((err) => console.log(err));
-    } catch (err) {
-      console.log(err); //! to see what is the error
-      setError(err.response.data);
-    }
+    axios
+      .post("http://localhost:3000/api/auth/register", values)
+      .then((res) => {
+        console.log(res);
+        navigate("/login");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -64,6 +59,7 @@ const Register = () => {
           label="Email"
           className="w-[400px]"
           onChange={handleChange}
+          name="email"
           rules={[
             {
               required: true,
@@ -76,6 +72,7 @@ const Register = () => {
 
         <Form.Item
           label="username"
+          name="username"
           onChange={handleChange}
           rules={[
             {
@@ -89,6 +86,7 @@ const Register = () => {
 
         <Form.Item
           label="Password"
+          name="password"
           onChange={handleChange}
           rules={[
             {

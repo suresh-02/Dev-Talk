@@ -24,7 +24,7 @@ export const register = (req, res) => {
 
     db.query(q, values, (err, data) => {
       if (err) return res.status(422).json(err);
-      return res.status(201);
+      return res.status(201).send({});
     });
   });
 };
