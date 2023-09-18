@@ -1,14 +1,19 @@
 import logo from "../assets/logo.png";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form, Input } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+// import { AuthContext } from "../context/authContext";
+import { useAuth } from "../context/authContext";
 
-const App = () => {
+const Login = () => {
   const [values, setValues] = useState({
     username: "",
     Password: "",
   });
+
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const onFinish = (values) => {
     handleSubmit();
@@ -18,26 +23,30 @@ const App = () => {
   };
 
   const [err, setError] = useState(null);
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    // try {
+    //   axios
+    //     .post(login(values))
+    //     .then((res) => {
+    //       console.log(res);
+    //       navigate("/");
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // } catch (err) {
+    //   console.log(err);
+    // }
     try {
-      axios
-        .post("http://localhost:3000/api/auth/login", values)
-        .then((res) => {
-          console.log(res);
-          navigate("/");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      await login(values);
+      navigate("/");
     } catch (err) {
-      console.log(err.response.data);
-      setError(err.response.data);
+      console.error(err.message);
     }
   };
 
@@ -115,7 +124,7 @@ const App = () => {
     </div>
   );
 };
-export default App;
+export default Login;
 
 // ! disqualified code
 

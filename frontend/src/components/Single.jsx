@@ -20,8 +20,12 @@ const Single = () => {
 
             <div className="flex  items-center py-[20px] gap-4">
               <img src={test} className="h-[50px] w-[50px] rounded-full" />
-              <BiEdit size={20} />
-              <RiDeleteBin5Fill size={20} />
+              <button>
+                <BiEdit size={20} />
+              </button>
+              <button>
+                <RiDeleteBin5Fill size={20} />
+              </button>
             </div>
             {/* post content */}
             <div>

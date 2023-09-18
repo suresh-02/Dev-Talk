@@ -12,6 +12,7 @@ import NavBar from "./fixedComponents/NavBar.jsx";
 import Footer from "./fixedComponents/Footer.jsx";
 import NewPost from "./components/NewPost.jsx";
 import Register from "./components/Register";
+import { AuthContextProvider } from "./context/authContext";
 
 const Layout = () => {
   return (
@@ -54,6 +55,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
   </React.StrictMode>
 );
