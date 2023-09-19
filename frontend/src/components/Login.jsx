@@ -29,9 +29,11 @@ const Login = () => {
   };
 
   const handleSubmit = async () => {
+    login(values);
+    navigate("/");
     // try {
     //   axios
-    //     .post(login(values))
+    //     .post(login(values)) //! need to ask this to rams
     //     .then((res) => {
     //       console.log(res);
     //       navigate("/");
@@ -42,12 +44,12 @@ const Login = () => {
     // } catch (err) {
     //   console.log(err);
     // }
-    try {
-      await login(values);
-      navigate("/");
-    } catch (err) {
-      console.error(err.message);
-    }
+    //   try {
+    //     await login(values);
+    //     navigate("/");
+    //   } catch (err) {
+    //     console.error(err.message);
+    //   }
   };
 
   return (

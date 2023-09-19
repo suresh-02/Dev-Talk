@@ -16,6 +16,7 @@ export function AuthContextProvider({ children }) {
         "http://localhost:3000/api/auth/login",
         inputs
       );
+
       setCurrentUser(res.data);
     } catch (error) {
       // Handle errors here
